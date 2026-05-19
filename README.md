@@ -6,6 +6,8 @@ Think of it as a knowledgeable dog trainer friend you can talk to any time.
 
 The methodology inside this skill is based on real professional training session notes, built around positive reinforcement, marker training, criteria building, and self-control exercises.
 
+📖 **[Open the Dog Care Basics guide](https://sevcovic23.github.io/dog-advisor-skill/)** — a visual worksheet covering training principles, common issues, daily routine, and the 10 golden rules.
+
 ---
 
 ## What it does
