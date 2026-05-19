@@ -4,20 +4,37 @@ A Claude Code skill that helps you diagnose and solve problems with your dog. In
 
 Think of it as a knowledgeable dog trainer friend you can talk to any time.
 
+The methodology inside this skill is based on real professional training session notes, built around positive reinforcement, marker training, criteria building, and self-control exercises.
+
 ---
 
 ## What it does
 
-You describe a problem with your dog in plain language. The skill asks 2–3 focused questions to understand your specific situation. Then it tells you:
+You describe a problem with your dog in plain language. The skill asks 2–3 focused questions to understand your specific situation. Then it gives you:
 
-- **Why** your dog is behaving this way
-- **What to do** — 2 or 3 concrete steps, not a list of 20
+- **Management** — something you can do today to stop the problem from getting worse
+- **Training** — the actual fix, step by step, starting simple and building up
+- **Why it's happening** — so you understand your dog, not just follow instructions
+- **What mistakes to avoid** — the things most people do that accidentally make the problem worse
 - **How long** it realistically takes to see results
 - **When to see a vet or trainer** instead of trying to fix it yourself
 
-It handles all common dog issues: barking, biting, pulling on the leash, not listening, chewing things, jumping on people, anxiety, toilet accidents, and more.
+It handles all common dog issues: barking, biting, pulling on the leash, reactivity to other dogs, not coming when called, jumping on people, separation anxiety, chewing, and more.
 
 If your dog sounds genuinely unwell (not eating, lethargic, sudden change in behaviour), it will tell you to go to the vet before anything else.
+
+---
+
+## Training philosophy
+
+The skill is grounded in these principles:
+
+- **Positive reinforcement first** — reward what you want, remove rewards for what you don't want
+- **Marker system** — a clicker or word tells the dog the exact moment they got it right, even if the treat comes a second later
+- **Criteria building** — always start indoors, low distraction. Only raise the difficulty once the dog succeeds reliably
+- **Management vs training** — management stops the problem now; training fixes it for the future. You need both
+- **Self-control as a foundation** — many behaviour problems come from a dog that cannot regulate its emotions. Self-control exercises fix this at the root
+- **Senses under stress** — when a dog is overwhelmed, their hearing shuts down first. Stop talking and use your body and leash instead
 
 ---
 
