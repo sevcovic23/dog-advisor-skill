@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dog Care Basics — A Practical Guide</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-dark:  #2d4a3e;
+      --green-mid:   #3d6b5a;
+      --green-light: #5a8f76;
+      --green-pale:  #e8f2ed;
+      --cream:       #faf8f3;
+      --warm-white:  #ffffff;
+      --brown:       #7c5c3e;
+      --brown-light: #f5ede3;
+      --amber:       #d4893a;
+      --amber-light: #fdf3e7;
+      --red-light:   #fdecea;
+      --red:         #c0392b;
+      --text:        #1e2d27;
+      --text-mid:    #4a6357;
+      --text-light:  #7a9589;
+      --border:      #d4e6dc;
+      --shadow:      rgba(45,74,62,0.08);
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 60%, var(--green-light) 100%);
+      color: white;
+      padding: 80px 24px 72px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-inner { position: relative; max-width: 680px; margin: 0 auto; }
+    .hero-paw { font-size: 48px; margin-bottom: 20px; display: block; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: normal; letter-spacing: -0.5px; margin-bottom: 16px; }
+    .hero p { font-size: 1.15rem; opacity: 0.88; max-width: 520px; margin: 0 auto; }
+
+    /* ── LAYOUT ── */
+    .page { max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* ── SECTION HEADERS ── */
+    .section { margin-top: 64px; }
+    .section-label {
+      display: inline-block;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--green-light);
+      margin-bottom: 8px;
+    }
+    .section h2 {
+      font-size: 1.6rem;
+      font-weight: normal;
+      color: var(--green-dark);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .section-intro {
+      color: var(--text-mid);
+      font-size: 1rem;
+      max-width: 640px;
+      margin-bottom: 32px;
+    }
+
+    /* ── DIVIDER ── */
+    .divider { width: 48px; height: 3px; background: var(--green-light); border-radius: 2px; margin: 12px 0 24px; }
+
+    /* ── PHILOSOPHY CARDS ── */
+    .quadrant-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 560px) { .quadrant-grid { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--warm-white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 2px 12px var(--shadow);
+    }
+    .card-icon { font-size: 28px; margin-bottom: 12px; display: block; }
+    .card h3 { font-size: 1rem; font-weight: bold; color: var(--green-dark); margin-bottom: 6px; font-family: 'Arial', sans-serif; }
+    .card p { font-size: 0.9rem; color: var(--text-mid); line-height: 1.6; }
+    .card.green  { border-left: 4px solid var(--green-light); }
+    .card.amber  { border-left: 4px solid var(--amber); background: var(--amber-light); }
+    .card.warn   { border-left: 4px solid var(--red); background: var(--red-light); }
+
+    /* ── MARKER BOX ── */
+    .marker-box {
+      background: var(--green-pale);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 32px;
+      margin-top: 24px;
+    }
+    .marker-box h3 { font-size: 1.05rem; color: var(--green-dark); margin-bottom: 12px; font-family: 'Arial', sans-serif; font-weight: bold; }
+    .marker-sequence {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+      margin: 16px 0;
+    }
+    .marker-step {
+      background: var(--green-dark);
+      color: white;
+      border-radius: 10px;
+      padding: 10px 18px;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.85rem;
+      font-weight: bold;
+      text-align: center;
+      min-width: 100px;
+    }
+    .marker-arrow {
+      font-size: 1.4rem;
+      color: var(--green-light);
+      padding: 0 10px;
+    }
+    .marker-box p { font-size: 0.9rem; color: var(--text-mid); margin-top: 8px; }
+
+    /* ── CHECKLIST ── */
+    .checklist { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--warm-white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 0.95rem;
+    }
+    .checklist li .check {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .checklist li .check.done {
+      background: var(--green-light);
+      border-color: var(--green-light);
+    }
+    .checklist li .check.done::after {
+      content: '✓';
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 13px;
+      font-weight: bold;
+      height: 100%;
+    }
+    .checklist li .text strong { display: block; color: var(--text); font-family: 'Arial', sans-serif; font-size: 0.9rem; margin-bottom: 2px; }
+    .checklist li .text span  { color: var(--text-mid); font-size: 0.85rem; }
+
+    /* ── ISSUES GRID ── */
+    .issues-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 600px) { .issues-grid { grid-template-columns: 1fr; } }
+
+    .issue-card {
+      background: var(--warm-white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px var(--shadow);
+    }
+    .issue-header {
+      background: var(--green-dark);
+      color: white;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .issue-header .emoji { font-size: 1.3rem; }
+    .issue-header h3 { font-family: 'Arial', sans-serif; font-size: 0.95rem; font-weight: bold; }
+    .issue-body { padding: 18px 20px; }
+    .issue-body .why {
+      font-size: 0.82rem;
+      color: var(--text-mid);
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      font-style: italic;
+    }
+    .issue-body ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .issue-body ul li {
+      font-size: 0.85rem;
+      color: var(--text);
+      padding-left: 18px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .issue-body ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--green-light);
+      font-weight: bold;
+    }
+    .mistake {
+      margin-top: 12px;
+      padding: 10px 14px;
+      background: var(--red-light);
+      border-radius: 8px;
+      font-size: 0.82rem;
+      color: var(--red);
+    }
+    .mistake strong { display: block; font-family: 'Arial', sans-serif; margin-bottom: 2px; }
+
+    /* ── SELF CONTROL EXERCISE ── */
+    .exercise-steps { display: flex; flex-direction: column; gap: 0; margin-top: 20px; }
+    .exercise-step {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      padding: 20px 0;
+      border-bottom: 1px dashed var(--border);
+    }
+    .exercise-step:last-child { border-bottom: none; }
+    .step-num {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--green-dark);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Arial', sans-serif;
+      font-weight: bold;
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step-content h4 { font-family: 'Arial', sans-serif; font-size: 0.95rem; color: var(--green-dark); margin-bottom: 4px; }
+    .step-content p  { font-size: 0.88rem; color: var(--text-mid); line-height: 1.6; }
+
+    /* ── STRESS SIGNAL BOX ── */
+    .stress-box {
+      background: var(--amber-light);
+      border: 1px solid #e8c98a;
+      border-radius: 14px;
+      padding: 28px 32px;
+    }
+    .stress-box h3 { font-family: 'Arial', sans-serif; color: var(--brown); font-size: 1rem; margin-bottom: 16px; }
+    .stress-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 540px) { .stress-row { grid-template-columns: 1fr; } }
+    .stress-level {
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 0.85rem;
+    }
+    .stress-level.low    { background: #eaf6ee; border: 1px solid #b0d9bc; }
+    .stress-level.mid    { background: #fff8e6; border: 1px solid #f0d07a; }
+    .stress-level.high   { background: var(--red-light); border: 1px solid #f5b8b2; }
+    .stress-level .label { font-family: 'Arial', sans-serif; font-weight: bold; font-size: 0.8rem; margin-bottom: 6px; }
+    .stress-level.low  .label { color: #2d7a44; }
+    .stress-level.mid  .label { color: #8a6200; }
+    .stress-level.high .label { color: var(--red); }
+    .stress-level ul { list-style: none; padding: 0; }
+    .stress-level ul li { font-size: 0.82rem; color: var(--text-mid); padding: 2px 0; }
+
+    .tip-box {
+      background: var(--warm-white);
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-size: 0.88rem;
+      color: var(--text);
+      border-left: 4px solid var(--amber);
+    }
+    .tip-box strong { font-family: 'Arial', sans-serif; color: var(--brown); }
+
+    /* ── GOLDEN RULES ── */
+    .rules-list { display: flex; flex-direction: column; gap: 12px; counter-reset: rule; }
+    .rule {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      counter-increment: rule;
+    }
+    .rule-num {
+      font-family: 'Georgia', serif;
+      font-size: 2rem;
+      color: var(--border);
+      line-height: 1;
+      width: 36px;
+      flex-shrink: 0;
+      text-align: right;
+    }
+    .rule-content h4 { font-family: 'Arial', sans-serif; font-size: 0.95rem; color: var(--green-dark); margin-bottom: 2px; }
+    .rule-content p  { font-size: 0.88rem; color: var(--text-mid); }
+
+    /* ── FOOTER ── */
+    .footer {
+      margin-top: 80px;
+      padding: 40px 24px;
+      background: var(--green-dark);
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      font-size: 0.85rem;
+    }
+    .footer a { color: rgba(255,255,255,0.9); }
+
+    /* ── PRINT ── */
+    @media print {
+      .hero { background: var(--green-dark) !important; -webkit-print-color-adjust: exact; }
+      .section { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <span class="hero-paw">🐾</span>
+    <h1>Dog Care Basics</h1>
+    <p>A practical worksheet for understanding your dog, solving common problems, and building a relationship based on trust — not force.</p>
+  </div>
+</header>
+
+<main class="page">
+
+  <!-- TRAINING PHILOSOPHY -->
+  <section class="section">
+    <span class="section-label">Foundation</span>
+    <h2>How dogs actually learn</h2>
+    <div class="divider"></div>
+    <p class="section-intro">Every behaviour your dog does is shaped by what happens after it. There are four basic ways behaviour is reinforced or reduced. Understanding these helps you train smarter.</p>
+
+    <div class="quadrant-grid">
+      <div class="card green">
+        <span class="card-icon">🎁</span>
+        <h3>Add something good → behaviour increases</h3>
+        <p>You give a treat, toy, or praise the moment the dog does something right. This is positive reinforcement — your most powerful tool. Use it constantly.</p>
+        <p style="margin-top:8px; font-size:0.82rem; color:var(--green-light);"><em>Example: dog sits → treat. Dog walks calmly → marker + treat.</em></p>
+      </div>
+      <div class="card green">
+        <span class="card-icon">😮‍💨</span>
+        <h3>Remove something uncomfortable → behaviour increases</h3>
+        <p>Leash pressure releases the moment the dog steps into position. The relief reinforces the behaviour. This is negative reinforcement — a skilled technique when used gently.</p>
+        <p style="margin-top:8px; font-size:0.82rem; color:var(--green-light);"><em>Example: gentle leash tension → dog moves closer → tension releases → dog learns to stay close.</em></p>
+      </div>
+      <div class="card amber">
+        <span class="card-icon">⏸️</span>
+        <h3>Remove something good → behaviour decreases</h3>
+        <p>Walk away, withdraw attention, or end the game the moment the dog does something you don't want. No drama. The dog learns this behaviour leads nowhere.</p>
+        <p style="margin-top:8px; font-size:0.82rem; color:var(--amber);"><em>Example: dog jumps → you turn away. Dog bites too hard → you stop playing.</em></p>
+      </div>
+      <div class="card warn">
+        <span class="card-icon">🚫</span>
+        <h3>Add something unpleasant → avoid this</h3>
+        <p>Shock collars, choke chains used painfully, hitting. This may stop a behaviour short-term but damages trust, creates anxiety, and causes fallout behaviours. Avoid.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARKER SYSTEM -->
+  <section class="section">
+    <span class="section-label">Communication</span>
+    <h2>The marker system</h2>
+    <div class="divider"></div>
+    <p class="section-intro">Dogs live in the present. A treat that arrives 3 seconds after a good behaviour might reward whatever happened in between. A marker — a click or a short word — bridges the gap. It tells the dog the exact moment they got it right.</p>
+
+    <div class="marker-box">
+      <h3>The sequence — always in this order</h3>
+      <div class="marker-sequence">
+        <div class="marker-step">Give cue</div>
+        <span class="marker-arrow">→</span>
+        <div class="marker-step">Dog responds</div>
+        <span class="marker-arrow">→</span>
+        <div class="marker-step">Marker<br><small style="font-weight:normal;opacity:0.8">"yes" / click</small></div>
+        <span class="marker-arrow">→</span>
+        <div class="marker-step">Reward arrives</div>
+      </div>
+      <p><strong>Choose one marker and stick to it.</strong> A clicker is precise. A short spoken word ("yes", "good", "šik") works just as well and you always have it with you. Once the marker sounds, the reward always follows — this is a promise to your dog. Break it and the marker loses meaning.</p>
+    </div>
+  </section>
+
+  <!-- DAILY WORKSHEET -->
+  <section class="section">
+    <span class="section-label">Daily Routine</span>
+    <h2>Daily care worksheet</h2>
+    <div class="divider"></div>
+    <p class="section-intro">Click each item to mark it done. A well-cared-for dog has physical needs, mental needs, and clear communication met every day.</p>
+
+    <ul class="checklist" id="checklist">
+      <li>
+        <div class="check" onclick="toggle(this)"></div>
+        <div class="text">
+          <strong>Morning exercise</strong>
+          <span>At least 30–45 minutes of real physical activity — not just a garden wander. Sniff-heavy walks count double: letting your dog follow their nose is mentally tiring. Tired dog = calmer dog.</span>
+        </div>
+      </li>
+      <li>
+        <div class="check" onclick="toggle(this)"></div>
+        <div class="text">
+          <strong>Earn breakfast (not from a bowl)</strong>
+          <span>Give 3/4 of the daily food through training, games, or scatter feeding — not just a bowl left on the floor. Dogs that work for food have better focus and more motivation to train. If they ignore the bowl, pick it up after 2 minutes.</span>
+        </div>
+      </li>
+      <li>
+        <div class="check" onclick="toggle(this)"></div>
+        <div class="text">
+          <strong>Short training session (5–10 minutes)</strong>
+          <span>Short and sharp beats long and boring. Practice one or two things. Use your marker. End on a success. Twice a day is ideal — morning and evening.</span>
+        </div>
+      </li>
+      <li>
+        <div class="check" onclick="toggle(this)"></div>
+        <div class="text">
+          <strong>Self-control exercise</strong>
+          <span>3–5 repetitions of the activation–calming cycle (see below). Builds emotional regulation that transfers to every other situation.</span>
+        </div>
+      </li>
+      <li>
+        <div class="check" onclick="toggle(this)"></div>
+        <div class="text">
+          <strong>Mental stimulation</strong>
+          <span>A sniff walk, a frozen Kong, a puzzle feeder, a search game (hide treats around the house), or a shaping session with a new trick. 10 minutes of nose work is equivalent to 30 minutes of physical walking.</span>
+        </div>
+      </li>
+      <li>
+        <div class="check" onclick="toggle(this)"></div>
+        <div class="text">
+          <strong>Calm, structured rest time</strong>
+          <span>Dogs need 14–16 hours of sleep. Practice "place" or "mat" — sending your dog to a settled spot. Rest is not passive; teaching a dog to switch off is a skill.</span>
+        </div>
+      </li>
+      <li>
+        <div class="check" onclick="toggle(this)"></div>
+        <div class="text">
+          <strong>One rewarded recall practice</strong>
+          <span>Call your dog once, they come, they get the best treat you have. Then release them. Do this every single day. Recall is a habit — let it decay and it will fail exactly when you need it.</span>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- COMMON ISSUES -->
+  <section class="section">
+    <span class="section-label">Problem Solving</span>
+    <h2>Common issues — quick reference</h2>
+    <div class="divider"></div>
+    <p class="section-intro">Every issue has two parts: management (what to do today to stop it getting worse) and training (the actual fix over weeks). You need both.</p>
+
+    <div class="issues-grid">
+
+      <div class="issue-card">
+        <div class="issue-header">
+          <span class="emoji">📢</span>
+          <h3>Barking alone</h3>
+        </div>
+        <div class="issue-body">
+          <p class="why">Usually separation anxiety — the dog hasn't learned that being alone is safe and temporary. Often triggered by a routine change.</p>
+          <ul>
+            <li>Keep arrivals and departures completely low-key</li>
+            <li>Practice short absences — 30 seconds, then 2 minutes, then 5 — on weekends too</li>
+            <li>Frozen stuffed Kong given only when you leave (freeze overnight)</li>
+            <li>Consider a midday visit to break up the time alone</li>
+          </ul>
+          <div class="mistake">
+            <strong>Common mistake</strong>
+            Making a big fuss when leaving or arriving — it signals to the dog that your departure is a major event worth getting anxious about.
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-header">
+          <span class="emoji">🦷</span>
+          <h3>Puppy biting</h3>
+        </div>
+        <div class="issue-body">
+          <p class="why">Normal at 3–6 months. Puppies explore with their mouths. They need to learn that human skin has a very low bite threshold.</p>
+          <ul>
+            <li>Freeze the moment teeth touch skin — do not pull away</li>
+            <li>After 2 seconds, calmly stand up, fold arms, turn away for 30 seconds</li>
+            <li>Always have a toy in hand before play starts</li>
+            <li>Stop all movement when they bite ankles — movement is the trigger</li>
+          </ul>
+          <div class="mistake">
+            <strong>Common mistake</strong>
+            Pulling your hand away — this looks like fleeing prey and makes the game more exciting, not less.
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-header">
+          <span class="emoji">🐕</span>
+          <h3>Pulling on the leash</h3>
+        </div>
+        <div class="issue-body">
+          <p class="why">The dog has learned that pulling gets them forward. Every step you took while being pulled rewarded the pulling.</p>
+          <ul>
+            <li>Stop completely every time the leash goes tight — do not move forward</li>
+            <li>Reward calm walking at your hip, not in front</li>
+            <li>Start indoors, then a quiet street, then busier environments</li>
+            <li>Harness = free to sniff. Training collar = walking beside me</li>
+          </ul>
+          <div class="mistake">
+            <strong>Common mistake</strong>
+            Rewarding the dog in front of your body — this teaches them to be ahead of you, which is exactly the position pulling produces.
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-header">
+          <span class="emoji">😤</span>
+          <h3>Reactivity to other dogs</h3>
+        </div>
+        <div class="issue-body">
+          <p class="why">The dog is frustrated, fearful, or has learned that barking makes other dogs go away. The emotional response is now automatic.</p>
+          <ul>
+            <li>No unplanned greetings with unknown dogs</li>
+            <li>Use your body as a barrier between your dog and the trigger</li>
+            <li>Find the distance where they notice but don't react — train there</li>
+            <li>Mark and reward calm looking at the other dog (Look at That technique)</li>
+          </ul>
+          <div class="mistake">
+            <strong>Common mistake</strong>
+            Letting the dog greet after reacting — the greeting rewards the reactivity.
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-header">
+          <span class="emoji">🏃</span>
+          <h3>Not coming when called</h3>
+        </div>
+        <div class="issue-body">
+          <p class="why">Coming to you has been associated with the end of fun, or the cue has been repeated so many times without response that it has lost meaning.</p>
+          <ul>
+            <li>Never call unless you are confident they will come — go to them instead</li>
+            <li>When you call, run away from the dog — dogs chase movement</li>
+            <li>Recall always predicts the best reward you have</li>
+            <li>Practice multiple short recalls per walk, then release back to play</li>
+          </ul>
+          <div class="mistake">
+            <strong>Common mistake</strong>
+            Calling the dog to tell them off or to end the walk — this poisons the recall cue faster than anything else.
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-header">
+          <span class="emoji">🙋</span>
+          <h3>Jumping on people</h3>
+        </div>
+        <div class="issue-body">
+          <p class="why">At some point jumping produced attention — even being pushed away counts as interaction. The dog learned it works.</p>
+          <ul>
+            <li>The moment the dog jumps, all attention disappears — turn away, no words, no eye contact</li>
+            <li>The moment four paws are on the floor, give the attention they wanted</li>
+            <li>Ask for a sit before greeting — a dog that is sitting cannot jump</li>
+            <li>Every person the dog meets must follow the same rule</li>
+          </ul>
+          <div class="mistake">
+            <strong>Common mistake</strong>
+            Saying "no" or "down" — any word is attention, and attention is the reward the dog is jumping for.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SELF CONTROL EXERCISE -->
+  <section class="section">
+    <span class="section-label">Core Exercise</span>
+    <h2>The self-control exercise</h2>
+    <div class="divider"></div>
+    <p class="section-intro">Many behaviour problems — reactivity, jumping, biting, pulling — come from a dog that cannot regulate its own emotions when excited. This exercise builds that capacity and transfers across all situations. Do it daily.</p>
+
+    <div class="card" style="margin-bottom: 24px; background: var(--green-pale);">
+      <p style="font-size:0.9rem; color: var(--text-mid);">The goal is to teach your dog to flip between aroused and calm on cue. A dog that can do this is much easier to work with everywhere — on the street, around other dogs, at the vet.</p>
+    </div>
+
+    <div class="exercise-steps">
+      <div class="exercise-step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Wild play — 5 to 10 seconds</h4>
+          <p>Tug, chase a toy, throw a ball — whatever your dog finds exciting. Really get them going. Short bursts are better than long sessions.</p>
+        </div>
+      </div>
+      <div class="exercise-step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Stop and cue calm — "drop it", "enough"</h4>
+          <p>End the play with a clear cue. Put the toy away or behind your back. The dog should not still have access to it.</p>
+        </div>
+      </div>
+      <div class="exercise-step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Ask for a down-stay — 5 to 10 seconds</h4>
+          <p>Wait for calm. If the dog holds the down for the full time, marker + immediately back to play. If they break early, use your error signal ("nope"), guide them back, and make the next repetition shorter.</p>
+        </div>
+      </div>
+      <div class="exercise-step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>Back to wild play</h4>
+          <p>The play is the reward for the calm. Repeat 2–4 times per session. End on a success.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRESS SIGNALS -->
+  <section class="section">
+    <span class="section-label">Reading Your Dog</span>
+    <h2>Stress and arousal levels</h2>
+    <div class="divider"></div>
+    <p class="section-intro">Training only works in the middle zone. When a dog is over threshold — highly reactive, panicked, or extremely excited — their hearing shuts down first. Talking to them does not help.</p>
+
+    <div class="stress-box">
+      <h3>What to look for</h3>
+      <div class="stress-row">
+        <div class="stress-level low">
+          <div class="label">🟢 Calm — train here</div>
+          <ul>
+            <li>Loose, relaxed body</li>
+            <li>Soft eyes, relaxed mouth</li>
+            <li>Normal breathing</li>
+            <li>Takes treats easily</li>
+            <li>Responds to cues</li>
+          </ul>
+        </div>
+        <div class="stress-level mid">
+          <div class="label">🟡 Alert — proceed carefully</div>
+          <ul>
+            <li>Ears forward, tail up</li>
+            <li>Quick movements</li>
+            <li>Still takes treats</li>
+            <li>Can follow cues</li>
+            <li>Focused but manageable</li>
+          </ul>
+        </div>
+        <div class="stress-level high">
+          <div class="label">🔴 Over threshold — manage only</div>
+          <ul>
+            <li>Fixation, stiff body</li>
+            <li>Barking, lunging</li>
+            <li>Ignores treats</li>
+            <li>Cannot hear commands</li>
+            <li>Panting, yawning, shaking</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tip-box">
+        <strong>When your dog is over threshold, stop talking.</strong> Use your body as a barrier. Use the leash as a calm, steady guide — not a yank. Increase distance from the trigger first. Then, once the dog is calm, address the problem through training later. Never try to train a dog that cannot hear you.
+      </div>
+    </div>
+  </section>
+
+  <!-- GOLDEN RULES -->
+  <section class="section">
+    <span class="section-label">Remember</span>
+    <h2>10 golden rules</h2>
+    <div class="divider"></div>
+
+    <div class="rules-list">
+      <div class="rule">
+        <div class="rule-num">1</div>
+        <div class="rule-content">
+          <h4>Reward good attempts, not just perfect responses</h4>
+          <p>Partial success is still progress. A dog moving in the right direction deserves acknowledgement, especially early in learning.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <div class="rule-num">2</div>
+        <div class="rule-content">
+          <h4>Start indoors, always</h4>
+          <p>A dog that can do something indoors cannot necessarily do it outside. When the environment gets harder, drop your criteria back down to basics.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <div class="rule-num">3</div>
+        <div class="rule-content">
+          <h4>Never repeat a cue the dog has already ignored</h4>
+          <p>If they didn't respond, the environment is too hard or they don't know the behaviour well enough yet. Repeating teaches them the first cue doesn't matter.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <div class="rule-num">4</div>
+        <div class="rule-content">
+          <h4>Management stops practice; training stops the problem</h4>
+          <p>Every time a dog practises a bad behaviour, they get better at it. Use management to prevent practice while you work on training.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <div class="rule-num">5</div>
+        <div class="rule-content">
+          <h4>After an error, make the next task easier</h4>
+          <p>Error signal → guide back to position → do not reward the return → make the next attempt simpler. End on a success.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <div class="rule-num">6</div>
+        <div class="rule-content">
+          <h4>The reward is whatever the dog actually values in that moment</h4>
+          <p>Treats, toys, freedom to sniff, access to another dog. If the dog won't take food, they are too stressed. Address the arousal level first.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <div class="rule-num">7</div>
+        <div class="rule-content">
+          <h4>Consistency across all people in the household</h4>
+          <p>One person allowing the dog to jump while another corrects it teaches the dog to jump at person A. Rules must be the same for everyone.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <div class="rule-num">8</div>
+        <div class="rule-content">
+          <h4>Short sessions beat long sessions</h4>
+          <p>Five minutes twice a day beats forty minutes once a week. Dogs learn better in short, focused bursts. Always end before they get bored or frustrated.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <div class="rule-num">9</div>
+        <div class="rule-content">
+          <h4>What the dog figures out itself is stronger than what you lure them into</h4>
+          <p>Shaping (rewarding small steps toward a behaviour) produces more reliable results than always guiding with a treat. Use luring to introduce new things; fade it quickly.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <div class="rule-num">10</div>
+        <div class="rule-content">
+          <h4>When in doubt, see a professional in person</h4>
+          <p>Serious aggression, deep anxiety, and complex behaviour problems need eyes on the dog. A good trainer watches things no guide can catch.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>Built with the <a href="https://github.com/sevcovic23/dog-advisor-skill">Dog Advisor Skill</a> for Claude Code &nbsp;·&nbsp; Based on professional training session notes &nbsp;·&nbsp; Not a substitute for a professional trainer or veterinarian</p>
+</footer>
+
+<script>
+  function toggle(el) {
+    el.classList.toggle('done');
+  }
+</script>
+
+</body>
+</html>
